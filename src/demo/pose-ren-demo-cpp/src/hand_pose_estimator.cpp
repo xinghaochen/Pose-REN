@@ -30,7 +30,7 @@ using std::string;
 using std::vector;
 
 HandPoseEstimator::HandPoseEstimator(string dataset) {
-	gpu = 0;	// cpu only
+	gpu = 0;
 	fx = 463.889;
 	fy = 463.889;
 	ux = 320;
@@ -53,13 +53,6 @@ HandPoseEstimator::HandPoseEstimator(string dataset) {
 	width = 96;
 	output_blob = "predict";
 	output_blob_init = "predict";
-	//weights = "D:/Projects/region-ensemble-network/models/model_icvl_ren_9x6x6.caffemodel";
-	//model = "D:/Projects/region-ensemble-network/models/deploy_icvl_ren_9x6x6.prototxt";
-	//weights = "models/model_baseline_hands17_full.caffemodel";
-//	weights = "models/model_baseline_hands17_full_large_aug.caffemodel";
-//	model = "models/deploy_baseline_hands17.prototxt";
-//	weights_guided = "models/model_pose_ren_hands17_full_large_aug.caffemodel";
-//	model_guided = "models/deploy_pose_ren_hands17_py.prototxt";
 	if (dataset.compare("hands17") == 0) {
         weights = "../../../models/model_baseline_hands17_full_large_aug.caffemodel";
         model = "../../../models/deploy_hands17_baseline.prototxt";
