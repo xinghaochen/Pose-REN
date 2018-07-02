@@ -1,20 +1,15 @@
 ## Realsense Realtime Demo Using Pose-REN
+ICVL
 
+![demo_icvl_cxh](../../doc/demo_icvl_cxh.gif)
 
-<p align="center">
-    <b>ICVL</b><br>
-    ![demo_icvl_cxh](../../doc/demo_icvl_cxh.gif)
-</p>
+NYU
 
-<p align="center">
-    <b>NYU</b><br>
-    ![demo_nyu_cxh](../../doc/demo_nyu_cxh.gif)
-</p>
+![demo_nyu_cxh](../../doc/demo_nyu_cxh.gif)
 
-<p align="center">
-    <b>MSRA</b><br>
-    ![demo_msra_cxh](../../doc/demo_msra_cxh.gif)
-</p>
+MSRA
+
+![demo_msra_cxh](../../doc/demo_msra_cxh.gif)
 
 ### Realsense Realtime Demo
 We provide a realtime hand pose estimation demo using Intel Realsense device.
