@@ -1,0 +1,25 @@
+syntax = "proto2";
+
+package caffe;
+
+// NOTE
+// Update the next available ID when you add a new LayerParameter field.
+//
+// LayerParameter next available layer-specific ID: 149 (last added: GenetateROIParameter)
+message LayerParameter {
+  ...
+  optional GenerateROIParameter generate_roi_param= 148;
+  ...
+}
+
+/// Message that stores parameters used by GenerateROILayer
+message GenerateROIParameter {
+  optional int32 joint_idx = 1 [default = 0];
+  optional int32 roi_h = 2 [default = 6];
+  optional int32 roi_w = 3 [default = 6];
+  optional int32 img_h = 4 [default = 96];
+  optional int32 img_w = 5 [default = 96];
+  optional float spatial_mul = 6 [default = 8];
+}
+
+

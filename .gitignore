@@ -1,0 +1,30 @@
+# config
+config.py
+
+# build dir
+*build
+
+# C
+*.so
+
+# python
+*.idea
+*.pyc
+*.manifest
+*.spec
+.spyderproject
+.spyproject
+
+# system
+*~
+*core
+
+# weights
+*.caffemodel
+*.solverstate
+
+# others
+output/*
+src/training*
+caffe-pose
+*hands17*

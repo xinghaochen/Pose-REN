@@ -1,0 +1,1219 @@
+name: "ICVL-Pose-REN"
+input: "data"
+input_shape {
+    dim: 1
+    dim: 1
+    dim: 96
+    dim: 96
+}
+input: "prev_pose"
+input_shape {
+    dim: 1
+    dim: 1
+    dim: 1
+    dim: 48
+}
+layer {
+  name: "conv0"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv0"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 16
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu0"
+  type: "ReLU"
+  bottom: "conv0"
+  top: "conv0"
+}
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "conv0"
+  top: "conv1"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 16
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "pool1"
+  type: "Pooling"
+  bottom: "conv1"
+  top: "pool1"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "pool1"
+  top: "pool1"
+}
+layer {
+  name: "conv2_0"
+  type: "Convolution"
+  bottom: "pool1"
+  top: "conv2_0"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 32
+    pad: 0
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu2_0"
+  type: "ReLU"
+  bottom: "conv2_0"
+  top: "conv2_0"
+}
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "conv2_0"
+  top: "conv2"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 32
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "conv2"
+  top: "conv2"
+}
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "conv2"
+  top: "conv3"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 32
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "res1"
+  type: "Eltwise"
+  bottom: "conv2_0"
+  bottom: "conv3"
+  top: "res1"
+}
+layer {
+  name: "pool2"
+  type: "Pooling"
+  bottom: "res1"
+  top: "pool2"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "pool2"
+  top: "pool2"
+}
+layer {
+  name: "conv3_0"
+  type: "Convolution"
+  bottom: "pool2"
+  top: "conv3_0"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 64
+    pad: 0
+    kernel_size: 1
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu3_0"
+  type: "ReLU"
+  bottom: "conv3_0"
+  top: "conv3_0"
+}
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "conv3_0"
+  top: "conv4"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 64
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "conv4"
+  top: "conv4"
+}
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "conv4"
+  top: "conv5"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  convolution_param {
+    num_output: 64
+    pad: 1
+    kernel_size: 3
+    stride: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "res2"
+  type: "Eltwise"
+  bottom: "conv3_0"
+  bottom: "conv5"
+  top: "res2"
+}
+layer {
+  name: "pool3"
+  type: "Pooling"
+  bottom: "res2"
+  top: "pool3"
+  pooling_param {
+    pool: MAX
+    kernel_size: 2
+    stride: 2
+  }
+}
+layer {
+  name: "relu5"
+  type: "ReLU"
+  bottom: "pool3"
+  top: "pool3"
+}
+layer {
+  name: "rois_0"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_0"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 0, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_0"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_0"
+  top: "roi_pool_0"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_0"
+  type: "InnerProduct"
+  bottom: "roi_pool_0"
+  top: "fc1_0"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_0"
+  type: "ReLU"
+  bottom: "fc1_0"
+  top: "fc1_0"
+}
+layer {
+  name: "drop1_0"
+  type: "Dropout"
+  bottom: "fc1_0"
+  top: "fc1_0"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_1"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_1"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 1, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_1"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_1"
+  top: "roi_pool_1"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_1"
+  type: "InnerProduct"
+  bottom: "roi_pool_1"
+  top: "fc1_1"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_1"
+  type: "ReLU"
+  bottom: "fc1_1"
+  top: "fc1_1"
+}
+layer {
+  name: "drop1_1"
+  type: "Dropout"
+  bottom: "fc1_1"
+  top: "fc1_1"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_3"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_3"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 3, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_3"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_3"
+  top: "roi_pool_3"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_3"
+  type: "InnerProduct"
+  bottom: "roi_pool_3"
+  top: "fc1_3"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_3"
+  type: "ReLU"
+  bottom: "fc1_3"
+  top: "fc1_3"
+}
+layer {
+  name: "drop1_3"
+  type: "Dropout"
+  bottom: "fc1_3"
+  top: "fc1_3"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_4"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_4"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 4, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_4"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_4"
+  top: "roi_pool_4"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_4"
+  type: "InnerProduct"
+  bottom: "roi_pool_4"
+  top: "fc1_4"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_4"
+  type: "ReLU"
+  bottom: "fc1_4"
+  top: "fc1_4"
+}
+layer {
+  name: "drop1_4"
+  type: "Dropout"
+  bottom: "fc1_4"
+  top: "fc1_4"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_6"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_6"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 6, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_6"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_6"
+  top: "roi_pool_6"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_6"
+  type: "InnerProduct"
+  bottom: "roi_pool_6"
+  top: "fc1_6"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_6"
+  type: "ReLU"
+  bottom: "fc1_6"
+  top: "fc1_6"
+}
+layer {
+  name: "drop1_6"
+  type: "Dropout"
+  bottom: "fc1_6"
+  top: "fc1_6"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_7"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_7"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 7, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_7"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_7"
+  top: "roi_pool_7"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_7"
+  type: "InnerProduct"
+  bottom: "roi_pool_7"
+  top: "fc1_7"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_7"
+  type: "ReLU"
+  bottom: "fc1_7"
+  top: "fc1_7"
+}
+layer {
+  name: "drop1_7"
+  type: "Dropout"
+  bottom: "fc1_7"
+  top: "fc1_7"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_9"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_9"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 9, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_9"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_9"
+  top: "roi_pool_9"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_9"
+  type: "InnerProduct"
+  bottom: "roi_pool_9"
+  top: "fc1_9"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_9"
+  type: "ReLU"
+  bottom: "fc1_9"
+  top: "fc1_9"
+}
+layer {
+  name: "drop1_9"
+  type: "Dropout"
+  bottom: "fc1_9"
+  top: "fc1_9"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_10"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_10"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 10, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_10"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_10"
+  top: "roi_pool_10"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_10"
+  type: "InnerProduct"
+  bottom: "roi_pool_10"
+  top: "fc1_10"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_10"
+  type: "ReLU"
+  bottom: "fc1_10"
+  top: "fc1_10"
+}
+layer {
+  name: "drop1_10"
+  type: "Dropout"
+  bottom: "fc1_10"
+  top: "fc1_10"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_12"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_12"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 12, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_12"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_12"
+  top: "roi_pool_12"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_12"
+  type: "InnerProduct"
+  bottom: "roi_pool_12"
+  top: "fc1_12"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_12"
+  type: "ReLU"
+  bottom: "fc1_12"
+  top: "fc1_12"
+}
+layer {
+  name: "drop1_12"
+  type: "Dropout"
+  bottom: "fc1_12"
+  top: "fc1_12"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_13"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_13"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 13, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_13"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_13"
+  top: "roi_pool_13"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_13"
+  type: "InnerProduct"
+  bottom: "roi_pool_13"
+  top: "fc1_13"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_13"
+  type: "ReLU"
+  bottom: "fc1_13"
+  top: "fc1_13"
+}
+layer {
+  name: "drop1_13"
+  type: "Dropout"
+  bottom: "fc1_13"
+  top: "fc1_13"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "rois_15"
+  type: "Python"
+  bottom: "prev_pose"
+  top: "rois_15"
+  python_param {
+    module: "layers.generate_roi_layer"
+    layer: "GenerateROILayer"
+    param_str: "{\'img_w\': 96, \'roi_h\': 6, \'spatial_mul\': 8, \'roi_w\': 6, \'joint_idx\': 15, \'img_h\': 96}"
+  }
+}
+layer {
+  name: "roi_pool_15"
+  type: "ROIPooling"
+  bottom: "pool3"
+  bottom: "rois_15"
+  top: "roi_pool_15"
+  roi_pooling_param {
+    pooled_h: 7
+    pooled_w: 7
+    spatial_scale: 0.125
+  }
+}
+layer {
+  name: "fc1_15"
+  type: "InnerProduct"
+  bottom: "roi_pool_15"
+  top: "fc1_15"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu6_15"
+  type: "ReLU"
+  bottom: "fc1_15"
+  top: "fc1_15"
+}
+layer {
+  name: "drop1_15"
+  type: "Dropout"
+  bottom: "fc1_15"
+  top: "fc1_15"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "concate_1_0"
+  type: "Concat"
+  bottom: "fc1_0"
+  bottom: "fc1_1"
+  bottom: "fc1_3"
+  top: "concate_1_0"
+}
+layer {
+  name: "fc2_0"
+  type: "InnerProduct"
+  bottom: "concate_1_0"
+  top: "fc2_0"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu7_0"
+  type: "ReLU"
+  bottom: "fc2_0"
+  top: "fc2_0"
+}
+layer {
+  name: "drop2_0"
+  type: "Dropout"
+  bottom: "fc2_0"
+  top: "fc2_0"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "concate_1_1"
+  type: "Concat"
+  bottom: "fc1_0"
+  bottom: "fc1_4"
+  bottom: "fc1_6"
+  top: "concate_1_1"
+}
+layer {
+  name: "fc2_1"
+  type: "InnerProduct"
+  bottom: "concate_1_1"
+  top: "fc2_1"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu7_1"
+  type: "ReLU"
+  bottom: "fc2_1"
+  top: "fc2_1"
+}
+layer {
+  name: "drop2_1"
+  type: "Dropout"
+  bottom: "fc2_1"
+  top: "fc2_1"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "concate_1_2"
+  type: "Concat"
+  bottom: "fc1_0"
+  bottom: "fc1_7"
+  bottom: "fc1_9"
+  top: "concate_1_2"
+}
+layer {
+  name: "fc2_2"
+  type: "InnerProduct"
+  bottom: "concate_1_2"
+  top: "fc2_2"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu7_2"
+  type: "ReLU"
+  bottom: "fc2_2"
+  top: "fc2_2"
+}
+layer {
+  name: "drop2_2"
+  type: "Dropout"
+  bottom: "fc2_2"
+  top: "fc2_2"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "concate_1_3"
+  type: "Concat"
+  bottom: "fc1_0"
+  bottom: "fc1_10"
+  bottom: "fc1_12"
+  top: "concate_1_3"
+}
+layer {
+  name: "fc2_3"
+  type: "InnerProduct"
+  bottom: "concate_1_3"
+  top: "fc2_3"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu7_3"
+  type: "ReLU"
+  bottom: "fc2_3"
+  top: "fc2_3"
+}
+layer {
+  name: "drop2_3"
+  type: "Dropout"
+  bottom: "fc2_3"
+  top: "fc2_3"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "concate_1_4"
+  type: "Concat"
+  bottom: "fc1_0"
+  bottom: "fc1_13"
+  bottom: "fc1_15"
+  top: "concate_1_4"
+}
+layer {
+  name: "fc2_4"
+  type: "InnerProduct"
+  bottom: "concate_1_4"
+  top: "fc2_4"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 2048
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+layer {
+  name: "relu7_4"
+  type: "ReLU"
+  bottom: "fc2_4"
+  top: "fc2_4"
+}
+layer {
+  name: "drop2_4"
+  type: "Dropout"
+  bottom: "fc2_4"
+  top: "fc2_4"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+layer {
+  name: "fc_concat"
+  type: "Concat"
+  bottom: "fc2_0"
+  bottom: "fc2_1"
+  bottom: "fc2_2"
+  bottom: "fc2_3"
+  bottom: "fc2_4"
+  top: "fc_concat"
+}
+layer {
+  name: "fc3_0"
+  type: "InnerProduct"
+  bottom: "fc_concat"
+  top: "predict"
+  param {
+    lr_mult: 1.0
+  }
+  param {
+    lr_mult: 2.0
+  }
+  inner_product_param {
+    num_output: 48
+    weight_filler {
+      type: "gaussian"
+      std: 0.0010000000475
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
