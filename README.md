@@ -57,8 +57,8 @@ If you prefer using python layer, add `path/to/src/libs` to PYTHONPATH, otherwis
 
 The tables below show the predicted labels and pretrained models on ICVL, NYU and MSRA dataset. All labels are in the format of (u, v, d) where u and v are pixel coordinates.
 
-| Dataset | Predicted Labels | Models
-|:-------|:-----:|:-------:|:-------:|:-------:|
+| Dataset | Predicted Labels | Models|
+|-------|-------|-------|
 | ICVL | [Download](./results/NEUCOM18_ICVL_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=1uo5e7q7LIamkb9-nLdkbckBEmYRd3sn8) |
 | NYU | [Download](./results/NEUCOM18_NYU_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=14RJPi_V6R-G3tQRwgKtUtRTc7Kb27KmC) |
 | MSRA | [Download](./results/NEUCOM18_MSRA_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=18mKhUcg5eUOvs4KoHuNYLTVPJR5O99Or) |
