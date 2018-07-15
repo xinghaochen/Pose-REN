@@ -59,9 +59,9 @@ The tables below show the predicted labels and pretrained models on ICVL, NYU an
 
 | Dataset | Predicted Labels | Models|
 |-------|-------|-------|
-| ICVL | [Download](./results/NEUCOM18_ICVL_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=1uo5e7q7LIamkb9-nLdkbckBEmYRd3sn8) |
-| NYU | [Download](./results/NEUCOM18_NYU_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=14RJPi_V6R-G3tQRwgKtUtRTc7Kb27KmC) |
-| MSRA | [Download](./results/NEUCOM18_MSRA_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=18mKhUcg5eUOvs4KoHuNYLTVPJR5O99Or) |
+| ICVL | [Download](./results/NEUCOM18_ICVL_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=1uo5e7q7LIamkb9-nLdkbckBEmYRd3sn8) or [\[Baidu Yun\]](https://pan.baidu.com/s/1-sy7dUlZyQ2mkp10z-QUug) |
+| NYU | [Download](./results/NEUCOM18_NYU_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=14RJPi_V6R-G3tQRwgKtUtRTc7Kb27KmC) or [\[Baidu Yun\]](https://pan.baidu.com/s/1bDMxhhTdcKq2qfE1nkLY_g)  |
+| MSRA | [Download](./results/NEUCOM18_MSRA_Pose_REN.txt) | [\[Google Drive\]](https://drive.google.com/open?id=18mKhUcg5eUOvs4KoHuNYLTVPJR5O99Or) or [\[Baidu Yun\]](https://pan.baidu.com/s/1FzTZkO3JXMCW4Ri-_QEt3Q)  |
 
 ### Visualization
 
