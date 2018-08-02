@@ -40,7 +40,7 @@ git clone https://github.com/xinghaochen/caffe-pose.git
 
 Install caffe:
 ```
-cd caffe
+cd caffe-pose
 cp Makefile.config.example Makefile.config
 # uncomment WITH_PYTHON_LAYER := 1
 # change other settings accordingly
@@ -77,11 +77,11 @@ First copy and modify the example `config.py` for your setup. Please change `dat
 $ cp config.py.example config.py
 ```
 
-Use the Python script `evaluation/run_model.py` for prediction with predefined centers in `labels` directory:
+Use the Python script `src/testing/predict.py` for prediction with predefined centers in `labels` directory:
 ``` bash
 $ python src/testing/predict.py icvl your/path/to/output/file.txt
 ```
-The script depends on [pycaffe](https://github.com/BVLC/caffe).
+The script depends on pycaffe.
 
 Please see [here](https://github.com/xinghaochen/awesome-hand-pose-estimation/tree/master/evaluation) for how to evaluate performance of hand pose estimation.
 
@@ -90,7 +90,7 @@ We provide a realtime hand pose estimation demo using Intel Realsense device.
 Note that we just use a naive depth thresholding method to detect the hand. Therefore, the hand should be in the range of [0, 650mm] to run this demo.
 We tested this realtime demo with an [Intel Realsense SR300](https://software.intel.com/en-us/realsense/sr300camera).
 
-**Please use your right hand for this demo and try to avoid clustered background and redundant arm around the hand.**
+**Please use your right hand for this demo and try to avoid clustered foreground and redundant arm around the hand.**
 
 #### Python demo with [librealsense](https://github.com/IntelRealSense/librealsense) [recommended]
 First compile and install the [librealsense](https://github.com/IntelRealSense/librealsense) and its [python wrapper](https://github.com/IntelRealSense/librealsense/tree/5285629b4ddb374f1). After everything is working properly, just run the following python script for demo:
@@ -103,11 +103,11 @@ By default this script uses pre-trained weights on ICVL dataset. You can change 
 python src/demo/realsense_realtime_demo_librealsense2.py  nyu/msra/icvl
 ```
 
-Notes: The speed of this python demo is not optimal and it runs slower than the c++ demo.
+Notes: The speed of this python demo is not optimal and it runs slightly slower than the c++ demo.
 
 #### C++ demo
 
-First compile the codes:
+First compile and build:
 
 ```
 cd src/demo/pose-ren-demo-cpp
