@@ -67,7 +67,14 @@ def get_model(dataset, name='baseline', test_id = 0):
     if not check_dataset(dataset):
         print('invalid dataset: {}'.format(dataset))
         exit(-1)
-    if dataset == 'msra':
+    if dataset == 'hands17':
+        if name == 'baseline':
+            return (os.path.join(ROOT_DIR, '../models/deploy_{}_{}.prototxt'.format(dataset, name)),
+                    os.path.join(ROOT_DIR, '../models/model_{}_{}_full_large_aug.caffemodel'.format(name, dataset, test_id)))
+        elif name == 'pose_ren':
+            return (os.path.join(ROOT_DIR, '../models/deploy_{}_{}_py.prototxt'.format(dataset, name)),
+                    os.path.join(ROOT_DIR, '../models/model_{}_{}_full_large_aug.caffemodel'.format(name, dataset, test_id)))
+    elif dataset == 'msra':
         return (os.path.join(ROOT_DIR, '../models/deploy_{}_{}.prototxt'.format(dataset, name)),
                 os.path.join(ROOT_DIR, '../models/{}_{}_{}.caffemodel'.format(dataset, name, test_id)))
     else:
@@ -133,7 +140,10 @@ def get_sketch_setting(dataset):
         return [(0, 1), (1, 2), (2, 3), (3, 4), (0, 5), (5, 6), (6, 7), (7, 8),
                 (0, 9), (9, 10), (10, 11), (11, 12), (0, 13), (13, 14), (14, 15), (15, 16),
                 (0, 17), (17, 18), (18, 19), (19, 20)]
-
+    elif dataset == 'hands17':
+        return [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 6), (6, 7), (7, 8),
+                (2, 9), (9, 10), (10, 11), (3, 12), (12, 13), (13, 14), (4, 15), (15, 16),
+                (16, 17), (5, 18), (18, 19), (19, 20)]
 
 class Color(Enum):
     RED = (0, 0, 255)
@@ -156,7 +166,13 @@ def get_sketch_color(dataset):
         return [Color.RED, Color.RED, Color.RED, Color.RED, Color.GREEN, Color.GREEN, Color.GREEN, Color.GREEN,
                 Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW,
                 Color.PURPLE, Color.PURPLE, Color.PURPLE, Color.PURPLE]
-
+    elif dataset == 'hands17':
+        return [Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.RED,
+              Color.GREEN, Color.GREEN, Color.GREEN,
+              Color.BLUE, Color.BLUE, Color.BLUE,
+              Color.YELLOW, Color.YELLOW, Color.YELLOW,
+              Color.PURPLE, Color.PURPLE, Color.PURPLE,
+              Color.RED, Color.RED, Color.RED]
 
 def get_joint_color(dataset):
     if dataset == 'icvl':
@@ -172,7 +188,10 @@ def get_joint_color(dataset):
                 Color.GREEN,
                 Color.BLUE, Color.BLUE, Color.BLUE, Color.BLUE, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW,
                 Color.PURPLE, Color.PURPLE, Color.PURPLE, Color.PURPLE]
-
+    elif dataset == 'hands17':
+        return [Color.CYAN, Color.GREEN, Color.BLUE, Color.YELLOW, Color.PURPLE, Color.RED, Color.GREEN, Color.GREEN, Color.GREEN,
+                Color.BLUE, Color.BLUE, Color.BLUE, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.PURPLE, Color.PURPLE, Color.PURPLE,
+                Color.RED, Color.RED, Color.RED]
 
 def draw_pose_old(dataset, img, pose):
     if not check_dataset(dataset):

@@ -40,11 +40,14 @@ def read_frame_from_device(pipeline, depth_scale):
     depth = depth_image * depth_scale * 1000
     return depth
 
-def show_results(img, results, dataset):
+def show_results(img, results, cropped_image, dataset):
     img = np.minimum(img, 1500)
     img = (img - img.min()) / (img.max() - img.min())
     img = np.uint8(img*255)
+    # draw cropped image
+    img[:96, :96] = (cropped_image+1)*255/2
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+    cv2.rectangle(img, (0, 0), (96, 96), (255, 0, 0))
     img_show = util.draw_pose(dataset, img, results)
     return img_show
 
@@ -79,8 +82,8 @@ def main():
         if dataset == 'icvl':
             depth = depth[:, ::-1]  # flip
         # get hand pose
-        results = hand_model.detect_image(depth)
-        img_show = show_results(depth, results, dataset)
+        results, cropped_image = hand_model.detect_image(depth)
+        img_show = show_results(depth, results, cropped_image, dataset)
         cv2.imshow('result', img_show)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

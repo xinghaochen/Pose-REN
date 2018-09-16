@@ -53,9 +53,13 @@ class ModelPoseREN(object):
         _, channels, height, width = self._net.blobs['data'].shape
         # run Init-CNN
         self._net_init.blobs['data'].reshape(batch_size, channels, height, width)
+        cropped_image = self._crop_image(imgs[idx], centers[idx])
         for idx in range(batch_size):
-            self._net_init.blobs['data'].data[idx, ...] = self._crop_image(imgs[idx], centers[idx])
-        init_poses = self._net_init.forward()['fc3']
+            self._net_init.blobs['data'].data[idx, ...] = cropped_image
+        if self._dataset == 'hands17':
+            init_poses = self._net_init.forward()['predict']
+        else:
+            init_poses = self._net_init.forward()['fc3']
         # run Pose-REN
         prev_pose = init_poses
 
@@ -63,15 +67,19 @@ class ModelPoseREN(object):
         _, channels = self._net.blobs['prev_pose'].shape
         self._net.blobs['prev_pose'].reshape(batch_size, channels)
         for idx in range(batch_size):
-            self._net.blobs['data'].data[idx, ...] = self._crop_image(imgs[idx], centers[idx])
+            self._net.blobs['data'].data[idx, ...] = cropped_image
         for it in xrange(3):
             self._net.blobs['prev_pose'].data[...] = prev_pose
-            poses = self._net.forward()['fc3_0']
+            if self._dataset == 'hands17':
+                poses = self._net.forward()['predict']
+            else:
+                poses = self._net.forward()['fc3_0']
             prev_pose = poses
-        return self._transform_pose(poses, centers)
+        return self._transform_pose(poses, centers), cropped_image
     
     def detect_image(self, img):
-        return self.detect_images([img])[0, ...]
+        res, cropped_image = self.detect_images([img])
+        return res[0, ...], cropped_image
 
     def detect_files(self, base_dir, names, centers=None, dataset=None, max_batch=64, is_flip=False):
         assert max_batch > 0
