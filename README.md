@@ -101,7 +101,7 @@ python src/demo/realsense_realtime_demo_librealsense2.py
 
 By default this script uses pre-trained weights on ICVL dataset. You can change the pre-trained model by specifying the dataset.
 ``` bash
-python src/demo/realsense_realtime_demo_librealsense2.py  nyu/msra/icvl
+python src/demo/realsense_realtime_demo_librealsense2.py  nyu/msra/icvl/hands17
 ```
 
 Notes: The speed of this python demo is not optimal and it runs slightly slower than the c++ demo.
@@ -125,7 +125,7 @@ cd ..                 # redirect to src/demo/pose-ren-demo-cpp
 
 By default it uses pre-trained weights on Hands17 dataset. You can change the pre-trained model by specifying the dataset.
 ``` bash
-./build/src/PoseREN  nyu/msra/icvl
+./build/src/PoseREN  nyu/msra/icvl/hands17
 ```
 
 Notes: This C++ demo is not fully developed and you may have to deal with some dependency problems to make it works. It servers as a preliminary project to demonstrate how to use Pose-REN in C++.

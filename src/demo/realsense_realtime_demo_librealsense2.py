@@ -47,7 +47,7 @@ def show_results(img, results, cropped_image, dataset):
     # draw cropped image
     img[:96, :96] = (cropped_image+1)*255/2
     img = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
-    cv2.rectangle(img, (0, 0), (96, 96), (255, 0, 0))
+    cv2.rectangle(img, (0, 0), (96, 96), (255, 0, 0), thickness=2)
     img_show = util.draw_pose(dataset, img, results)
     return img_show
 
