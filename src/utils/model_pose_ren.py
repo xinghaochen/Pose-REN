@@ -53,8 +53,10 @@ class ModelPoseREN(object):
         _, channels, height, width = self._net.blobs['data'].shape
         # run Init-CNN
         self._net_init.blobs['data'].reshape(batch_size, channels, height, width)
-        cropped_image = self._crop_image(imgs[idx], centers[idx])
+        cropped_images = []
         for idx in range(batch_size):
+            cropped_image = self._crop_image(imgs[idx], centers[idx])
+            cropped_images.append(cropped_image)
             self._net_init.blobs['data'].data[idx, ...] = cropped_image
         if self._dataset == 'hands17':
             init_poses = self._net_init.forward()['predict']
@@ -67,7 +69,7 @@ class ModelPoseREN(object):
         _, channels = self._net.blobs['prev_pose'].shape
         self._net.blobs['prev_pose'].reshape(batch_size, channels)
         for idx in range(batch_size):
-            self._net.blobs['data'].data[idx, ...] = cropped_image
+            self._net.blobs['data'].data[idx, ...] = cropped_images[idx]
         for it in xrange(3):
             self._net.blobs['prev_pose'].data[...] = prev_pose
             if self._dataset == 'hands17':
@@ -75,11 +77,11 @@ class ModelPoseREN(object):
             else:
                 poses = self._net.forward()['fc3_0']
             prev_pose = poses
-        return self._transform_pose(poses, centers), cropped_image
+        return self._transform_pose(poses, centers), cropped_images
     
     def detect_image(self, img):
         res, cropped_image = self.detect_images([img])
-        return res[0, ...], cropped_image
+        return res[0, ...], cropped_image[0]
 
     def detect_files(self, base_dir, names, centers=None, dataset=None, max_batch=64, is_flip=False):
         assert max_batch > 0

@@ -256,6 +256,7 @@ def get_center_fast(img, upper=650, lower=1):
         centers[0] = 0
         centers[1] = 0
         centers[2] = 300.0
+    #print centers
     return centers
 
 
