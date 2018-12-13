@@ -130,11 +130,8 @@ vector<float> HandPoseEstimator::predict_guided(const cv::Mat& cv_img, cv::Mat& 
 	std::cout << "get center and crop image time: " << duration << '\n';
 
 	//feed data
-	start = std::clock();
 	boost::shared_ptr<Blob<float> > blob_data = test_net->blob_by_name("data");
 	Mat2Blob(crop, blob_data);
-	duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-	std::cout << "baseline feed data time: " << duration << '\n';
 
 	// forward
 	start = std::clock();
@@ -152,14 +149,11 @@ vector<float> HandPoseEstimator::predict_guided(const cv::Mat& cv_img, cv::Mat& 
     const float* prev_data = data;
     for (int iter=0; iter<2; iter++) {
 	    Pose2Blob(prev_data, res_size, blob_pose_guided);
-	    duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-	    std::cout << "pose ren feed data time: " << duration << '\n';
-	    start = std::clock();
 	    test_net_guided->Forward();
 	    prev_data = blob_guided->cpu_data();
-	    duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-	    std::cout << "pose ren forward time: " << duration << '\n';
     }
+	duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+	std::cout << "pose ren iter twice feed data and forward time: " << duration << '\n';
 	const float* data_guided = blob_guided->cpu_data();
 
 	// debug output
@@ -171,7 +165,6 @@ vector<float> HandPoseEstimator::predict_guided(const cv::Mat& cv_img, cv::Mat& 
 		data_roi++;
 	}*/
 
-	start = std::clock();
 	vector<float> result;
 	for (int k = 0; k < res_size/3; ++k) {
 		float u = *data_guided;
@@ -200,8 +193,6 @@ vector<float> HandPoseEstimator::predict_guided(const cv::Mat& cv_img, cv::Mat& 
 		result.push_back(v);
 		result.push_back(d);
 	}
-	duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-	std::cout << "transform result time: " << duration << '\n';
 
 	return result;
 }

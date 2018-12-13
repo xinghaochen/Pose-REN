@@ -131,10 +131,6 @@ int main(int argc, char** argv) try
     int cnt = 0;
     while (true)
     {
-        std::clock_t start1;
-        double duration1;
-        start1 = std::clock();
-
         // This call waits until a new coherent set of frames is available on a device
         // Calls to get_frame_data(...) and get_frame_timestamp(...) on a device will return stable values until wait_for_frames(...) is called
         //pipe.wait_for_frames();
@@ -153,10 +149,6 @@ int main(int argc, char** argv) try
             cv::flip(depth, dst, 1);
         // cv::imshow("dst", dst);
 
-        std::clock_t start;
-        double duration;
-        start = std::clock();
-
         if (RUN_BASELINE) {
             vector<float> result = hpe.predict(dst, crop);
             // display
@@ -164,7 +156,12 @@ int main(int argc, char** argv) try
             cv::imshow("result", show);
         }
         if (RUN_POSE_REN) {
+		    std::clock_t start;
+		    double duration;
+		    start = std::clock();
             vector<float> result_guided = hpe.predict_guided(dst, crop);
+		    duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+		    std::cout << "overall time: " << duration << '\n';
             cv::Mat show_guided = show_depth_joints(dst, crop.clone(), result_guided, hpe, dataset);
             cv::imshow("result_guided", show_guided);
             if (is_save_result) {
@@ -174,15 +171,11 @@ int main(int argc, char** argv) try
                 cv::imwrite(filename, show_guided);
             }
         }
-        duration = (std::clock() - start) / (double)CLOCKS_PER_SEC;
-        std::cout << "overall time: " << duration << '\n';
 
         char kb = cv::waitKey(1);
         if(kb == 'q')
             break;
 
-        duration1 = (std::clock() - start1) / (double)CLOCKS_PER_SEC;
-        std::cout << "overall time 2: " << duration1 << '\n';
         cnt++;
     }
 

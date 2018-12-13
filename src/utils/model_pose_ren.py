@@ -79,8 +79,11 @@ class ModelPoseREN(object):
             prev_pose = poses
         return self._transform_pose(poses, centers), cropped_images
     
-    def detect_image(self, img):
-        res, cropped_image = self.detect_images([img])
+    def detect_image(self, img, center=None):
+        if center is None:
+            res, cropped_image = self.detect_images([img])
+        else:
+            res, cropped_image = self.detect_images([img], [center])
         return res[0, ...], cropped_image[0]
 
     def detect_files(self, base_dir, names, centers=None, dataset=None, max_batch=64, is_flip=False):
