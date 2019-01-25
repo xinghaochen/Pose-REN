@@ -128,7 +128,7 @@ By default it uses pre-trained weights on Hands17 dataset. You can change the pr
 ./build/src/PoseREN  nyu/msra/icvl/hands17
 ```
 
-Notes: This C++ demo is not fully developed and you may have to deal with some dependency problems to make it works. It servers as a preliminary project to demonstrate how to use Pose-REN in C++.
+Notes: This C++ demo is not fully developed and you may have to deal with some dependency problems to make it works. It serves as a preliminary project to demonstrate how to use Pose-REN in C++.
 
 ### License
 Our code and pre-trained models are available for non-commercial research purposes only.
