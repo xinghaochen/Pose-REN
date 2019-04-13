@@ -104,13 +104,15 @@ class ModelPoseREN(object):
                 batch_centers.append(centers[idx, :])
 
             if len(batch_imgs) == max_batch:
-                for line, _ in self.detect_images(batch_imgs, batch_centers):
+                res, _= self.detect_images(batch_imgs, batch_centers)
+                for line in res:
                     results.append(line)
                 del batch_imgs[:]
                 del batch_centers[:]
                 print('{}/{}'.format(idx + 1, len(names)))
         if batch_imgs:
-            for line, _ in self.detect_images(batch_imgs, batch_centers):
+            res, _ = self.detect_images(batch_imgs, batch_centers)
+            for line in res:
                 results.append(line)
         print('done!')
         return np.array(results)
