@@ -1,6 +1,6 @@
 ## Pose Guided Structured Region Ensemble Network for Cascaded Hand Pose Estimation
 
-[*Neurocomputing*](https://doi.org/10.1016/j.neucom.2018.06.097)
+[*Neurocomputing 2019*](https://doi.org/10.1016/j.neucom.2018.06.097)
 
 By Xinghao Chen, Guijin Wang, Hengkai Guo, Cairong Zhang, Tsinghua University.
 
