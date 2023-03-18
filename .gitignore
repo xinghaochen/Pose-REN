@@ -25,7 +25,7 @@ config.py
 
 # others
 output/*
-src/training*
+#src/training*
 caffe-pose
-*hands17*
+#*hands17*
 backup
