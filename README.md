@@ -1,10 +1,10 @@
 ## Pose Guided Structured Region Ensemble Network for Cascaded Hand Pose Estimation
 
-to appear in *Neurocomputing*
+[*Neurocomputing 2019*](https://doi.org/10.1016/j.neucom.2018.06.097)
 
 By Xinghao Chen, Guijin Wang, Hengkai Guo, Cairong Zhang, Tsinghua University.
 
-[\[arXiv\]](https://arxiv.org/abs/1708.03416)&nbsp;&nbsp;&nbsp;&nbsp;[\[Project Page\]](https://sites.google.com/view/xinghaochen/projects/Pose-REN)
+[\[ScienceDirect\]](https://www.sciencedirect.com/science/article/pii/S0925231219309087)&nbsp;&nbsp;&nbsp;&nbsp;[\[arXiv\]](https://arxiv.org/abs/1708.03416)&nbsp;&nbsp;&nbsp;&nbsp;[\[Project Page\]](https://sites.google.com/view/xinghaochen/projects/Pose-REN)
 
 ![demo1](doc/demo_wjn.gif)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![demo2](doc/demo_zmm.gif)
 
@@ -26,6 +26,7 @@ If you find our work useful in your research, please consider citing:
       title={Pose Guided Structured Region Ensemble Network for Cascaded Hand Pose Estimation},
       author={Chen, Xinghao and Wang, Guijin and Guo, Hengkai and Zhang, Cairong},
       journal={Neurocomputing},
+      doi={https://doi.org/10.1016/j.neucom.2018.06.097},
       year={2018}
     }
 
